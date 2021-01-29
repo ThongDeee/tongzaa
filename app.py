@@ -47,9 +47,11 @@ def getbotnoi(message):
         return "ไม่มีวันปิดครับ"
     else: 
         return "ไม่เข้าใจคำถาม"
+    
+aimessage=getbotnoi(message) 
 def handle_message(event):
-    aimessage=getbotnoi(message)
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=aimessage))
+    
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.aimessage.text))
 
 
 
