@@ -51,7 +51,7 @@ def getbotnoi(message):
 aimessage=getbotnoi(message) 
 def handle_message(event):
     
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.aimessage.text))
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.aimessage))
 
 
 
