@@ -52,9 +52,7 @@ def handle_message(event):
             return "ไม่เข้าใจคำถาม"
 
     aimessage=getbotnoi(message)
-    line_bot_api.reply_message(
-        event.reply_token,
-        aimessage)
+    line_bot_api.reply_message(event.reply_token,aimessage)
 
 
 
