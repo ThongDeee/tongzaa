@@ -1,23 +1,14 @@
 import os
 import json
+import time
 import requests
 from flask import Flask, request, abort
-
-from linebot import (
-    LineBotApi, WebhookHandler
-)
-from linebot.exceptions import (
-    InvalidSignatureError
-)
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
-)
+from flask_jsonpify import jsonpify
+from flask_restful import Resource, Api, reqparse
+import pandas as pd
 
 app = Flask(__name__)
-
-line_bot_api = LineBotApi('NB2gli/J13truGWoTUHdV4RmtCdg+tQJMZilsy+gNDNKh9KqzBhoT1UJQ52uQ6io+WghT5VGLxkm6JdIlBKj9IJYD3ZEm1kGHn9smozXt76qS7nykV2dMhkdkQIzYB8EFemz7QilCcRp7m+C/wxBBQdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('5df4343c59b0042430e222166581c987')
-
+api = Api(app)
 
 @app.route("/callback", methods=['POST'])
 def callback():
