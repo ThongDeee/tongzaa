@@ -22,7 +22,7 @@ def getbotnoi(self,name):
 #design
 class WeatherCity(Resource):
     def get(self,name):
-        return {"datar":"Hi"+ getbotnoi(self,name)}
+        return {"ภาษา":"Hi"+ getbotnoi(self,name)}
    
 
 
