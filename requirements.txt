@@ -1,4 +1,4 @@
-python-3.9.1
+python-3.6.12
 flask
 line-bot-sdk
 flask_restful
