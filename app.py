@@ -1,34 +1,34 @@
+#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+# Server Side
+from flask import Flask
+from flask_restful import Api,Resource,abort,reqparse,marshal_with,fields
 import os
 import json
 import time
 import requests
-from flask import Flask, request, abort
-from flask_jsonpify import jsonpify
-from flask_restful import Resource, Api, reqparse
 import pandas as pd
+from flask_jsonpify import jsonpify
 
-app = Flask(__name__)
-api = Api(app)
+app=Flask(__name__)
+api=Api(app)
 
-@app.route('/')
+##data  
 
-class get_botnoi(Resource):
-    def get(self):
-        parser = reparse.RequestParser()
-        parser.add_argument('keyword', type=str)
-        dictp = parser.parse_args()
-        key=keyword['keyword']
-        def getbotnoi(key):
-            url = f"https://openapi.botnoi.ai/service-api/botnoichitchat?key={}&styleid=6&botname=บอท" 
-            headers = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTI1NTAxMzgsImlkIjoiNTJjYTJjODgtNDI2Ny00ZDEwLTkwNzktYmE4MGMxZWNhMzQ5IiwiaXNzIjoiZnloRHFJV1Npb3R4YmN3MkI4amZ5dUJBdUNHdFRLcm4iLCJuYW1lIjoiMTQzMy4wOCIsInBpYyI6Imh0dHBzOi8vcHJvZmlsZS5saW5lLXNjZG4ubmV0LzBoR1diUjVwYTVHSGhmS3pCcDdReG5MMk51RmhVb0JSNHdKMGxXR0h3dlFFMTJIVjRvWVJoVlNuOV9RMHh4SFZncE1VNEhHM3A1UWgxdyJ9.4OfNBZoVPN4cE4TJr5ybBzeRto0pz045lUcDB5iCBA4'}
-            response = requests.request("Get", url, headers=headers).json()        
-                return 'response'
-        ans=get(self)
-        result={}
-        
-        return result
+def getbotnoi(self,name):
+    return name
 
-api.add_resource(get_botnoi, '/cal',endpoint='cal')
+
+
+#design
+class WeatherCity(Resource):
+    def get(self,name):
+        return {"datar":"Hi"+ getbotnoi(self,name)}
+   
+
+
+#call
+api.add_resource(WeatherCity,"/w/<string:name>")
+
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
