@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-#-*- coding: utf-8 -*-
+
 # Server Side
 from flask import Flask
 from flask_restful import Api,Resource,abort,reqparse,marshal_with,fields
