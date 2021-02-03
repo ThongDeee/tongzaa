@@ -8,7 +8,7 @@ import json
 import time
 import requests
 import pandas as pd
-from flask_jsonpify import jsonpify
+
 
 app=Flask(__name__)
 api=Api(app)
