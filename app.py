@@ -22,7 +22,7 @@ class WeatherCity(MethodView):
         return getbotnoi(self, name)
 
 
-app.add_url_rule("/w/<string:name>", view_func=WeatherCity.as_view("weather"))
+app.add_url_rule("/input=<string:name>", view_func=WeatherCity.as_view("weather"))
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
