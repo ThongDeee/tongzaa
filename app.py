@@ -1,28 +1,37 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# Server Side
 from flask import Flask
-from flask.views import MethodView
+from flask_restful import Api,Resource,abort,reqparse,marshal_with,fields
+import json
 import requests
-import os
 
-app = Flask(__name__)
+app=Flask(__name__)
+api=Api(app)
 
-
-def getbotnoi(self,name):
-    undefined=name
+##input  
+def getbotnoi(self,inp1):
+    undefined=inp1
     url = f"https://openapi.botnoi.ai/botnoi/ecommerce?keyword={undefined}"   
     headers = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTIwOTM5MjcsImlkIjoiNTJjYTJjODgtNDI2Ny00ZDEwLTkwNzktYmE4MGMxZWNhMzQ5IiwiaXNzIjoiZnloRHFJV1Npb3R4YmN3MkI4amZ5dUJBdUNHdFRLcm4iLCJuYW1lIjoiMTQzMy4wOCIsInBpYyI6Imh0dHBzOi8vcHJvZmlsZS5saW5lLXNjZG4ubmV0LzBoR1diUjVwYTVHSGhmS3pCcDdReG5MMk51RmhVb0JSNHdKMGxXR0h3dlFFMTJIVjRvWVJoVlNuOV9RMHh4SFZncE1VNEhHM3A1UWgxdyJ9.wfEGlqTBL1YQMsKWOEunptFk3mudSINF0ohdjTraCD0'}
     response = requests.request("Get", url, headers=headers).json()
     return response
 
+#design
+@app.route('/')
+def index():
+    return "hello"
 
-class WeatherCity(MethodView):
-    def get(self, name):
-        return getbotnoi(self, name)
-
-
-app.add_url_rule("/input=<string:name>", view_func=WeatherCity.as_view("weather"))
+class speak(Resource):
+    def get(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('input', type=str)
+        dictp = parser.parse_args()
+        inp1 = dictp['input']
+        
+        result = getbotnoi(self,inp1)
+        
+        return result
+   
+#call
+api.add_resource(speak,'/cal',endpoint='cal')
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
